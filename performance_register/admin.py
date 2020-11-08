@@ -8,6 +8,24 @@ class SurveillanceOfficerAdmin(admin.ModelAdmin):
     search_fields = ['first_name', 'last_name']
 
 
+class SupervisorAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'id', 'project']
+    list_filter = ['project']
+    search_fields = ['first_name', 'last_name']
+
+
+class EvaluationQuestionAdmin(admin.ModelAdmin):
+    list_display = ['question_text', 'id']
+
+
+class SupervisorEvaluationAdmin(admin.ModelAdmin):
+    list_display = ['id', 'surveillance_officer', 'date_conducted']
+
+
+class EvaluationAnswerAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'id', 'question_score']
+
+
 class IndividualMonthlyRatingAdmin(admin.ModelAdmin):
     list_display = ['surveillance_officer', 'month', 'project']
     search_fields = ['surveillance_officer__first_name', 'surveillance_officer__last_name']
@@ -17,7 +35,7 @@ class IndividualMonthlyRatingAdmin(admin.ModelAdmin):
 
 admin.site.register(SurveillanceOfficer, SurveillanceOfficerAdmin)
 admin.site.register(IndividualMonthlyRating, IndividualMonthlyRatingAdmin)
-admin.site.register(Supervisor)
-admin.site.register(EvaluationQuestion)
-admin.site.register(SupervisorEvaluation)
-admin.site.register(EvaluationAnswer)
+admin.site.register(Supervisor, SupervisorAdmin)
+admin.site.register(EvaluationQuestion, EvaluationQuestionAdmin)
+admin.site.register(SupervisorEvaluation, SupervisorEvaluationAdmin)
+admin.site.register(EvaluationAnswer, EvaluationAnswerAdmin)

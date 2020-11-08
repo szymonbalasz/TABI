@@ -12,6 +12,7 @@ class SurveillanceOfficer(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
 class Supervisor(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -19,35 +20,6 @@ class Supervisor(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-
-class IndividualMonthlyRating(models.Model):
-    """
-    Individual Performance Scores as obtained from CiiMs, manual performance register and supervisor feedback forms
-    """
-    surveillance_officer = models.ForeignKey(SurveillanceOfficer, on_delete=models.CASCADE)
-    # CiiMs derived
-    total_entries = models.PositiveIntegerField()
-    total_shifts = models.PositiveIntegerField()
-    day_shifts = models.PositiveIntegerField()
-    incidents = models.PositiveIntegerField()
-    non_compliances = models.PositiveIntegerField()
-    observations = models.PositiveIntegerField()
-    covid19_non_compliances = models.PositiveIntegerField(default=0)
-    mistakes = models.PositiveIntegerField()
-    date = models.DateField()  # any day of month will work - we are only interested in the month
-
-    # evaluation
-
-
-    def __str__(self):
-        return f"{self.surveillance_officer} {self.date.year}/{self.date.month}"
-
-    def month(self):
-        return f"{self.date.year}/{self.date.month}"
-
-    def project(self):
-        return self.surveillance_officer.project
 
 
 class EvaluationQuestion(models.Model):
@@ -67,7 +39,7 @@ class SupervisorEvaluation(models.Model):
     supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Evaluation for {self.surveillance_officer} conducted on {self.date_conducted}"
+        return f"Evaluation_ID: {self.id} - {self.surveillance_officer} on {self.date_conducted.month}/{self.date_conducted.year}"
 
 
 class EvaluationAnswer(models.Model):
@@ -78,4 +50,34 @@ class EvaluationAnswer(models.Model):
     employee_feedback = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"EvaluationID: {self.evaluation.id} | QuestionID: {self.question.id}"
+        return f"Answer_ID: {self.id} to Question_ID: {self.question.id} on Evaluation_ID: {self.evaluation.id}"
+
+
+class IndividualMonthlyRating(models.Model):
+    """
+    Individual Performance Scores as obtained from CiiMs, manual performance register and supervisor feedback forms
+    """
+    surveillance_officer = models.ForeignKey(SurveillanceOfficer, on_delete=models.CASCADE)
+    # CiiMs derived
+    total_entries = models.PositiveIntegerField()
+    total_shifts = models.PositiveIntegerField()
+    day_shifts = models.PositiveIntegerField()
+    incidents = models.PositiveIntegerField()
+    non_compliances = models.PositiveIntegerField()
+    observations = models.PositiveIntegerField()
+    covid19_non_compliances = models.PositiveIntegerField(default=0)
+    mistakes = models.PositiveIntegerField()
+    date = models.DateField()  # any day of month will work - we are only interested in the month
+
+    # Supervisor evaluation
+    supervisor_evaluation = models.OneToOneField(SupervisorEvaluation, on_delete=models.CASCADE, default=None,
+                                                 blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.surveillance_officer} {self.date_conducted.month}/{self.date_conducted.year}"
+
+    def month(self):
+        return f"{self.date.year}/{self.date.month}"
+
+    def project(self):
+        return self.surveillance_officer.project
