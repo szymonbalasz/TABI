@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <!-- Meta-Information -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="stylesheet" href="{% static 'dashboard/css/bootstrap.min.css' %}" type="text/css">
+
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" href="{% static 'dashboard/css/icons.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'dashboard/css/main.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'dashboard/css/responsive.css' %}" type="text/css">
+
+    <!-- Color Scheme -->
+    <link rel="stylesheet" href="{% static 'dashboard/css/color-schemes/color.css' %}" type="text/css">
+</head>
+
+<body class="expand-data panel-data">
+    <div class="topbar">
+        <div class="logo">
+            <h1>
+                <a href="#" title="">
+                    <img src="{% static 'dashboard/images/logo1.png' %}" alt="" height="46px"/>
+                </a>
+            </h1>
+        </div>
+        <div class="topbar-data">
+            <div class="usr-act">
+                <i>HELLO, JOHN SMITH!</i>
+                <span>
+                    <img src="../static/dashboard/images/resource/topbar-usr1.jpg" alt="" />
+                    <i class="sts away"></i>
+                </span>
+                <div class="usr-inf">
+                    <div class="usr-thmb brd-rd50">
+                        <img class="brd-rd50" src="../static/dashboard/images/resource/usr.jpg" alt="" />
+                        <i class="sts away"></i>
+                        <a class="green-bg brd-rd5" href="#" title="">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                    <h5>
+                        <a href="#" title="">John Smith</a>
+                    </h5>
+                    <span>Co Worker</span>
+                    <i>076 9477 4896</i>
+                    <div class="act-pst-lk-stm">
+                        <a class="brd-rd5 green-bg-hover" href="#" title="">
+                            <i class="ion-heart"></i> Love</a>
+                        <a class="brd-rd5 blue-bg-hover" href="#" title="">
+                            <i class="ion-forward"></i> Reply</a>
+                    </div>
+                    <div class="usr-ft">
+                        <a class="btn-danger" href="#" title="">
+                            <i class="fa fa-sign-out"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="topbar-bottom-colors">
+            <i style="background-color: #2c3e50;"></i>
+            <i style="background-color: #9857b2;"></i>
+            <i style="background-color: #2c81ba;"></i>
+            <i style="background-color: #5dc12e;"></i>
+            <i style="background-color: #feb506;"></i>
+            <i style="background-color: #e17c21;"></i>
+            <i style="background-color: #bc382a;"></i>
+        </div>
+    </div>
+    <!-- Topbar -->
+
+    <header class="side-header expand-header">
+        <div class="nav-head">Navigation
+            <span class="menu-trigger">
+                <i class="ion-android-menu"></i>
+            </span>
+        </div>
+        <nav class="custom-scrollbar">
+            <ul class="drp-sec">
+                <li>
+                    <a href="" title="">
+                        <i class="ion-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+            <h4>Surveillance</h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="#" title="">
+                        <i class="ion-android-clipboard"></i>
+                        <span>Performance Register</span>
+                    </a>
+                    <ul class="sb-drp">
+                        <li>
+                            <a href="" title="">Latest</a>
+                        </li>
+                        <li>
+                            <a href="" title="">Historical</a>
+                        </li>
+                        <li>
+                            <a href="" title="">Trends</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block body %}
+
+    {% endblock %}
+
+    <!-- Panel Content -->
+    <footer>
+        <p>Copyright
+            <a href="#" title="">Tarsuis</a> 2020</p>
+        <span>Created by Szymon Balasz</span>
+    </footer>
+
+    <!-- Vendor: JS -->
+    <script src="{% static 'dashboard/js/jquery.min.js' %}" type="text/javascript"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'dashboard/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/select2.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/slick.min.js' %}" type="text/javascript"></script>
+
+    <!-- Web JS -->
+    <script src="{% static 'dashboard/js/isotope.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/isotope-int.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.counterup.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/waypoints.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/highcharts.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/exporting.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/highcharts-more.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/moment.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.circliful.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/fullcalendar.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.downCount.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.bootstrap-touchspin.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.formtowizard.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/form-validator.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/form-validator-lang-en.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/cropbox-min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/ion.rangeSlider.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/jquery.poptrox.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/styleswitcher.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dashboard/js/main.js' %}" type="text/javascript"></script>
+
+</body>
+
+</html>
