@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}T-ABI Coming Soon!{% endblock %}
+{% block body %}
+    {% load static %}
+    <div class="container text-center mb">
+        <div class="cmg-sn-inr">
+          <div class="lgo">
+            <h1>
+              <a href="{% url 'home' %}">
+                  <img src="{% static 'dashboard/images/logo1.png' %}" alt="" height="46px"/>
+              </a>
+            </h1>
+          </div>
+          <h2 class="trs-clr">Coming
+            <span>Soon</span>
+          </h2>
+          <h3>Website Under Construction</h3>
+          <span>Oops, looks like this feature isn't quite ready yet :(</span>
+        </div>
+    </div>
+{% endblock %}

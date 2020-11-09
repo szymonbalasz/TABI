@@ -74,7 +74,7 @@ class IndividualMonthlyRating(models.Model):
                                                  blank=True, null=True)
 
     def __str__(self):
-        return f"{self.surveillance_officer} {self.date_conducted.month}/{self.date_conducted.year}"
+        return f"{self.surveillance_officer} {self.date.month}/{self.date.year}"
 
     def month(self):
         return f"{self.date.year}/{self.date.month}"

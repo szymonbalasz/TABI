@@ -115,6 +115,7 @@ $color_vida_loca_approx: #579d1b;
 $color_bunker_approx: #0f1115;
 $seashell: #f1f1f1;
 $color_mercury_approx: #e6e6e6;
+$color_trs_aprox: #4fa7a7;
 
 //fonts
 $font_0: open sans;
@@ -151,11 +152,11 @@ $url_22: url(../images/resource/backgroundimg2.jpg);
 $url_23: url(../images/resource/backgroundimg3.jpg);
 $url_24: url(../images/resource/backgroundimg4.jpg);
 $url_25: url(../images/resource/backgroundimg5.jpg);
-$url_26: url(../images/resource/backgroundimg1.png);
-$url_27: url(../images/resource/backgroundimg2.png);
-$url_28: url(../images/resource/backgroundimg3.png);
-$url_29: url(../images/resource/backgroundimg4.png);
-$url_30: url(../images/resource/backgroundimg5.png);
+$url_26: url(../images/resource/backgroundimg1.jpg);
+$url_27: url(../images/resource/backgroundimg2.jpg);
+$url_28: url(../images/resource/backgroundimg3.jpg);
+$url_29: url(../images/resource/backgroundimg4.jpg);
+$url_30: url(../images/resource/backgroundimg5.jpg);
 
 //@extend-elements
 //original selectors
@@ -603,23 +604,23 @@ $url_30: url(../images/resource/backgroundimg5.png);
 }
 
 
-@import $url_0;
-@import $url_1;
-@import $url_2;
-@import $url_3;
-@import $url_4;
-@import $url_5;
-@import $url_6;
-@import $url_7;
-@import $url_8;
-@import $url_9;
-@import $url_10;
-@import $url_11;
-@import $url_12;
-@import $url_13;
-@import $url_14;
-@import $url_15;
-@import $url_18;
+//@import $url_0;
+//@import $url_1;
+//@import $url_2;
+//@import $url_3;
+//@import $url_4;
+//@import $url_5;
+//@import $url_6;
+//@import $url_7;
+//@import $url_8;
+//@import $url_9;
+//@import $url_10;
+//@import $url_11;
+//@import $url_12;
+//@import $url_13;
+//@import $url_14;
+//@import $url_15;
+//@import $url_18;
 html {
 	overflow-x: hidden;
 }
@@ -700,6 +701,9 @@ body {
 				}
 				&.green-clr {
 					color: $color_emerald_approx;
+				}
+				&.trs-clr {
+					color: $color_trs_aprox;
 				}
 			}
 		}
@@ -1374,6 +1378,9 @@ body {
 				&.green-clr {
 					color: $color_emerald_approx;
 				}
+				&.trs-clr {
+					color: $color_trs_aprox;
+				}
 			}
 		}
 		.inf-inr > span {
@@ -1385,6 +1392,9 @@ body {
 				}
 				&.green-clr {
 					color: $color_emerald_approx;
+				}
+				&.trs-clr {
+					color: $color_trs_aprox;
 				}
 			}
 		}
@@ -1589,6 +1599,9 @@ body {
 			&.green-clr {
 				color: $color_emerald_approx;
 			}
+			&.trs-clr {
+					color: $color_trs_aprox;
+				}
 		}
 	}
 }
@@ -5414,7 +5427,7 @@ footer {
 	height: 186px;
 	margin: 25px 0 0 -40px;
 	position: relative;
-	width: calc(100% +80px);
+	width: calc(100% + 80px);
 }
 .vc-map {
 	float: left;
@@ -6762,6 +6775,9 @@ span {
 			&.green-clr {
 				color: $color_emerald_approx;
 			}
+			&.trs-clr {
+					color: $color_trs_aprox;
+				}
 		}
 	}
 }
@@ -7197,6 +7213,9 @@ mark {
 		&.green-clr {
 			color: $color_emerald_approx;
 		}
+		&.trs-clr {
+					color: $color_trs_aprox;
+				}
 	}
 	input {
 		@extend %extend_39;
@@ -7418,7 +7437,7 @@ mark {
 	h3 {
 		font-size: 18px;
 		font-weight: 600;
-		color: ;
+		color: #1e1e1e;
 		letter-spacing: 0;
 		margin-bottom: 10px;
 	}
@@ -8295,6 +8314,14 @@ header {
 }
 .green-clr {
 	color: $color_emerald_approx;
+}
+
+.trs-bg {
+	background-color: $color_trs_aprox;
+}
+
+.trs-clr {
+	color: $color_trs_aprox;
 }
 .color-panel > span {
 	//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)

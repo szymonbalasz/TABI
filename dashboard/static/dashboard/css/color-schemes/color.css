@@ -302,3 +302,112 @@ body.dark .error-inner > h2.green-clr
 {
     border-left-color: #55ce63;
 }
+
+/*===== Color Tarsuis =====*/
+
+/*===== Background Color =====*/
+.trs-bg,
+.side-header > nav ul > li > a:after,
+.side-header > div > nav ul > li > a:after,
+.pckg-bdy > a:hover,
+.qnty-add-crt > a:hover,
+ul.steps > li.current,
+ul.steps > li.current > span,
+.form-wrp fieldset p a,
+.pgntn .pgntn-lst > li span.active,
+.style1 .pgntn-lst > li:hover a,
+.style2 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li.prv:hover a,
+.style3 .pgntn-lst > li.nxt:hover a,
+.style4 .pgntn-lst > li.prv:hover a,
+.style4 .pgntn-lst > li.nxt:hover a,
+.tab-styl2 > ul.nav-tabs > li.nav-item > a.active,
+.invoice-dte > a:hover,
+.pckg-bx.slctd.trs-bg,
+body.dark .style4 .pgntn-lst > li.prv:hover a,
+body.dark .style4 .pgntn-lst > li.nxt:hover a,
+body.dark .pgntn .pgntn-lst > li span.active,
+body.dark .style1 .pgntn-lst > li:hover a,
+body.dark .style2 .pgntn-lst > li:hover a,
+body.dark .style3 .pgntn-lst > li:hover a
+{
+    background-color: #4fa7a7;
+}
+
+.trs-bg-hover:hover
+{
+    background-color: #4fa7a7 !important;
+}
+
+/*===== Text Color =====*/
+.trs-clr,
+.scl-msg-inr > h2 a:hover,
+.insta-inf > h2 a:hover,
+.prd-inf > h4 a:hover,
+.prd-inf > h4 a:focus,
+.prd-inf a.rev-btn:hover,
+.prd-inf a.rev-btn:focus,
+.review-btn:hover,
+.review-btn:focus,
+.product-detail-tabs > ul.nav-tabs > li > a.active,
+.product-detail-tabs > ul.nav-tabs > li > a:hover,
+.product-detail-tabs > ul.nav-tabs > li > a:focus,
+.product-detail-tabs .tab-pane > ul > li:before,
+.style1 .pgntn-lst > li.prv:hover a,
+.style1 .pgntn-lst > li.nxt:hover a,
+.style1 .pgntn-lst > li.prv a:focus,
+.style1 .pgntn-lst > li.nxt a:focus,
+.pgntn.style4 .pgntn-lst > li span.active,
+.style4 .pgntn-lst > li:hover a,
+.style4 .pgntn-lst > li a:focus,
+footer > p a:hover,
+footer > p a:focus,
+.inf-inr > span i.trs-clr,
+.grn-inf-lst > span.trs-clr,
+.cnt-opt-lst > span:hover,
+.mail-opt > ul > li a:hover i,
+.mail-opt > ul > li a:hover,
+.mail-opt > ul > li a:focus,
+.mail-opt > ul > li a:focus i,
+body.dark .inf-inr > span i.trs-clr,
+body.dark .invoice-dte > span i.trs-clr,
+body.dark .invoice-hd > h1.trs-clr,
+body.dark .prd-inf a.rev-btn:hover,
+body.dark .prd-inf a.rev-btn:focus,
+body.dark .review-btn:hover,
+body.dark .review-btn:focus,
+body.dark .error-inner > h2.trs-clr
+{
+    color: #4fa7a7;
+}
+
+/*===== Border Color =====*/
+
+{
+    border-color: #4fa7a7;
+}
+
+/*===== Border Top Color =====*/
+
+{
+    border-top-color: #4fa7a7;
+}
+
+/*===== Border Right Color =====*/
+
+{
+    border-right-color: #4fa7a7;
+}
+
+/*===== Border Bottom Color =====*/
+.tab-styl2 > ul.nav-tabs
+{
+    border-bottom-color: #4fa7a7;
+}
+
+/*===== Border Left Color =====*/
+
+{
+    border-left-color: #4fa7a7;
+}

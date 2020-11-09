@@ -25,7 +25,7 @@
     <div class="topbar">
         <div class="logo">
             <h1>
-                <a href="#" title="">
+                <a href="{% url 'home' %}">
                     <img src="{% static 'dashboard/images/logo1.png' %}" alt="" height="46px"/>
                 </a>
             </h1>
@@ -84,7 +84,7 @@
         <nav class="custom-scrollbar">
             <ul class="drp-sec">
                 <li>
-                    <a href="" title="">
+                    <a href="{% url 'home' %}" title="">
                         <i class="ion-home"></i>
                         <span>Dashboard</span>
                     </a>
@@ -99,13 +99,13 @@
                     </a>
                     <ul class="sb-drp">
                         <li>
-                            <a href="" title="">Latest</a>
+                            <a href="{% url 'performance_register' %}" title="">Latest</a>
                         </li>
                         <li>
                             <a href="" title="">Historical</a>
                         </li>
                         <li>
-                            <a href="" title="">Trends</a>
+                            <a href="{% url 'coming_soon' %}" title="">Trends</a>
                         </li>
                     </ul>
                 </li>
