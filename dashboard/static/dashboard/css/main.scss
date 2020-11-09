@@ -1971,8 +1971,20 @@ input[type="file"] {
 		margin-bottom: 20px;
 	}
 }
+.rmv-ext-top10 {
+	@extend %extend_2;
+	.serv-bx {
+		margin-top: -10px;
+	}
+	.prd-bx {
+		margin-top: -10px;
+	}
+}
 .mt80 {
 	margin-top: 80px !important;
+}
+.mb50 {
+	margin-bottom: 50px !important;
 }
 .mb100 {
 	margin-bottom: 100px !important;
@@ -2273,6 +2285,11 @@ input[type="file"] {
 .pad50-40 {
 	padding: 50px 40px;
 }
+
+.pad0-40 {
+	padding: 0px 40px;
+}
+
 .pad50 {
 	padding: 50px;
 }
@@ -4168,6 +4185,11 @@ input[type="file"] {
 		height: 88px;
 		width: 80%;
 	}
+}
+.topbar-dropdown {
+	float: right;
+	padding: 0 45px;
+	width: 48%;
 }
 .online {
 	background-color: $color_lima_approx;

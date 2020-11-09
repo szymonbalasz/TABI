@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}T-ABI Login{% endblock %}
+{% block body %}
+    {% load static %}
+
+  <!-- Options Panel -->
+  <div class="panel-content">
+    <div class="lgn-wrp grysh">
+      <div class="bg-img" style="background-image: url({% static 'dashboard/images/bg-01.png' %});"></div>
+      <div class="lgn-innr">
+        <div class="widget lgn-frm">
+            <div class="mb50">
+                <a href="{% url 'home' %}">
+                      <img src="{% static 'dashboard/images/logo1.png' %}" alt="" height="100px"/>
+                </a>
+            </div>
+          <div class="frm-tl">
+            <h4>Login to T-ABI</h4>
+              {% if form.errors %}
+                    <span>Your username and password didn't match. Please try again.</span>
+                {% endif %}
+          </div>
+          <form method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+            <div class="row mrg10">
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <input class="brd-rd5 input" id="{{ form.username.id_for_label }}" maxlength="100" name="{{ form.username.html_name }}" type="text" placeholder="User Name" value="{{ form.username.value|default_if_none:"" }}"/>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <input class="brd-rd5 input" id="{{ form.password.id_for_label }}" maxlength="100" name="{{ form.password.html_name }}" type="password" placeholder="Password" value="{{ form.password.value|default_if_none:"" }}"/>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <span class="chbx">
+                  <input type="checkbox" id="chk1" />
+                  <label for="chk1">Remember Me</label>
+                </span>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <button class="trs-bg brd-rd5" type="submit" name="next" value="{{ next }}">Login Now</button>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <a href="{% url 'password_reset' %}" title="" class="frgt">Forget password?</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Login Wrapper -->
+  </div>
+  <!-- Panel Content -->
+  <footer>
+    <p>Copyright
+      <a href="#" title="">Example Company</a> &amp; 2017 - 2018</p>
+    <span>10GB of 250GB Free.</span>
+  </footer>
+
+{% endblock %}

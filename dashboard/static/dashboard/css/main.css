@@ -199,12 +199,18 @@ textarea {resize: none;}
     margin-bottom: -30px;
     width: 100%;
 }
+.rmv-ext-top10 {
+    float: left;
+    margin-top: -5px !important;
+    width: 100%;
+}
 .rmv-ext2 {margin-bottom: -35px;}
 .rmv-ext3 {margin-bottom: -40px;}
 .rmv-ext4 {margin-bottom: -45px;}
 .rmv-ext5 {margin-bottom: -50px;}
 .rmv-ext6 {margin-bottom: -20px;}
 .mt80 {margin-top: 80px !important;}
+.mb50 {margin-bottom: 50px !important;}
 .mb100 {margin-bottom: 100px !important;}
 .mb150 {margin-bottom: 150px !important;}
 .mrg {margin: 0;}
@@ -219,6 +225,8 @@ textarea {resize: none;}
 .pad40 {padding: 40px;}
 .widget.pad50-40,
 .pad50-40 {padding: 50px 40px;}
+.widget.pad0-40,
+.pad0-40 {padding: 0px 40px;}
 .widget.pad50,
 .pad50 {padding: 50px;}
 .widget.pad50-65,
@@ -680,8 +688,14 @@ button,
 }
 .topbar-search {
     float: right;
-    padding: 0 40px 0 60px;
-    width: 100%;
+    max-width: 255px;
+    position: relative;
+    background-color: #f7f7f7;
+    border-radius: 40px;
+    margin: 20px 40px 20px 100px;
+}
+.topbar-dropdown {
+    float: right;
     max-width: 255px;
     position: relative;
     background-color: #f7f7f7;
@@ -708,17 +722,16 @@ button,
     background-color: transparent;
 }
 .usr-act {
-    cursor: pointer;
     float: right;
-    padding: 25px 30px 25px 140px;
+    padding: 30px 30px 30px 30px;
     position: relative;
 }
 .usr-act > i {
     font-style: normal;
-    position: absolute;
+    position: relative;
     font-weight: 700;
     left: 0;
-    font-size: 13px;
+    font-size: 16px;
     font-family: open sans;
     letter-spacing: -.25px;
     color: #6a6a6a;
@@ -728,6 +741,8 @@ button,
     float: left;
     position: relative;
     width: 100%;
+    shape-outside: circle();
+    padding-left: 5px;
 }
 .sts {
     border: 3px solid #ffffff;
@@ -5558,6 +5573,7 @@ blockquote footer {
   float: left;
   width: 100%;
 }
+
 .set-ft > a {
   float: left;
   width: 100%;

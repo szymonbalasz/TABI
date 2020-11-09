@@ -5,6 +5,7 @@
 .logo {width: 22%;}
 .topbar-data {width: 78%;}
 .topbar-search {width: 40%;margin: 20px 20px 20px 30px;}
+.topbar-dropdown {width: 40%;margin: 20px 20px 20px 30px;}
 /*===== Responsive Header =====*/
 .side-header.expand-header {position: fixed;left: -280px;}
 .menu-trigger {right: -50px;line-height: 50px;width: 50px;height: 50px;font-size: 18px;}
@@ -19,6 +20,8 @@
 .panel-data {padding: 135px 40px 140px 40px;}
 .widget.pad50-40, 
 .pad50-40 {padding: 40px 30px;}
+.widget.pad0-40,
+.pad0-40 {padding: 0px 30px;}
 footer {padding: 20px 40px 14px;}
 .side-header > nav ul > li > a span,
 .side-header > div > nav ul > li > a span,
@@ -42,6 +45,7 @@ nav h4 {opacity: 1;}
 
 @media(max-width:770px){
 .topbar-search {padding: 0 15px;width: 35%;margin: 10px 20px;}
+.topbar-dropdown {padding: 0 15px;width: 35%;margin: 10px 20px;}
 .topbar-search>input {font-size: 13px;padding-left: 20px;}
 .usr-act {padding: 15px 20px;}
 .logo {width: 23%;margin: 10px 0;}
@@ -85,6 +89,7 @@ nav h4 {opacity: 1;}
 
 @media(max-width:480px){
 .topbar-search {display: none;}
+.topbar-dropdown {display: none;}
 .tobar-links {width: 77%;}
 .cnt-lst,
 .set-lst {left: auto;right: 0;}
