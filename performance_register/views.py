@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from . import models
+from dashboard.models import Project
 from datetime import date
 from .data import chart
 
@@ -12,7 +13,7 @@ def performance_register(request):
     elif latest_month == -1:
         latest_month = 11
 
-    active_project = request.user.user_profile.active_project
+    active_project = Project.objects.get(id=request.user.user_profile.active_project)
     ratings = models.IndividualMonthlyRating.objects.filter(
         surveillance_officer__project=active_project).filter(
         date__month=latest_month).filter(
@@ -22,6 +23,6 @@ def performance_register(request):
     names = [rating.surveillance_officer.__str__() for rating in ratings]
     scores = [rating.weighted_risk_observation_score()*100 for rating in ratings]
 
-    graph = chart(names, scores)
+    graph = chart(names, scores) if len(scores) > 0 else {}
 
     return render(request, 'performance_register.html', {'graph' : graph})
