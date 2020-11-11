@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}T-ABI Performance Register{% endblock %}
 {% block body %}
+{% load tags %}
 
     <!-- Options Panel -->
     <div class="pg-tp">
@@ -183,7 +184,8 @@
                             </div>
                             <div class="col-md-7 col-sm-12 col-lg-7">
                                 <div class="traffic-chart-wrp">
-                                    <div id="chrt1" style="height: 195px;"></div>
+                                    {{ graph|get_item:'script' | safe }}
+				                    {{ graph|get_item:'div' | safe }}
                                 </div>
                             </div>
                         </div>

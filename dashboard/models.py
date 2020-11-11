@@ -15,10 +15,17 @@ class UserProfile(models.Model):
     title = models.CharField(max_length=100)
     company = models.CharField(max_length=100, default='Tarsuis Client')
 
+    _active_project = None
+
     def __str__(self):
-        return f"{self.user.get_full_name()}"
+        return f"{self.user.get_full_name()} (User ID: {self.user.id})"
 
     @property
-    def default_project(self):
-        if self.projects:
-            return self.projects.get(id=1)
+    def active_project(self):
+        if not self._active_project:
+            self._active_project = self.projects.all()[0].id
+        return self._active_project
+
+    @active_project.setter
+    def active_project(self, project_id):
+        self._active_project = project_id

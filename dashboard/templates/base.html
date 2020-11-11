@@ -19,6 +19,10 @@
 
     <!-- Color Scheme -->
     <link rel="stylesheet" href="{% static 'dashboard/css/color-schemes/color.css' %}" type="text/css">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'dashboard/images/favicon.ico' %}">
+
 </head>
 
 <body class="expand-data panel-data">
@@ -32,13 +36,13 @@
         </div>
         <div class="topbar-data">
             <div class="dropdown topbar-search topbar-dropdown">
-              <a class="btn btn-secondary dropdown-toggle rmv-ext-top10" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              <a class="btn btn-secondary dropdown-toggle rmv-ext-top10" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 CHOOSE PROJECT
               </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 {% for project in user.user_profile.projects.all %}
-                    <a class="dropdown-item" href="{% url 'home' %}">{{ project }}</a>
+                    <a class="dropdown-item" href="{% url 'home' %}{{ project.id }}">{{ project }}</a>
                 {% endfor %}
                 </div>
             </div>
@@ -239,6 +243,12 @@
     <script src="{% static 'dashboard/js/jquery.poptrox.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'dashboard/js/styleswitcher.js' %}" type="text/javascript"></script>
     <script src="{% static 'dashboard/js/main.js' %}" type="text/javascript"></script>
+
+    <!-- Bokeh JS -->
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.2.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.2.3.min.js"></script>
 
 </body>
 
