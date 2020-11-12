@@ -1,1 +1,1 @@
-web:gunicorn tabi.wsgi
+web: gunicorn tabi.wsgi
