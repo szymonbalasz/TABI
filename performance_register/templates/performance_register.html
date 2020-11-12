@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% block title %}T-ABI Performance Register{% endblock %}
+{% block body %}
+    {% load tags %}
+
+    <!-- Options Panel -->
+    <div class="pg-tp">
+        <i class="ion-cube"></i>
+        <div class="pr-tp-inr">
+            <h4>Welcome to your
+                <strong>T-ABI</strong>
+                <span></span> Performance Register</h4>
+        </div>
+    </div>
+    <!-- Page Top -->
+
+    <div class="panel-content">
+        <div class="filter-items">
+            <div class="row grid-wrap mrg20">
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr1">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <i class="ion-podium"></i>
+                        <div class="stat-box-innr">
+                            <span>
+                                <i>{{ data|get_item:'cards'|get_item:'most_active' }}</i>
+                            </span>
+                            <h5>Most Active</h5>
+                        </div>
+                        <span><br/></span>
+                    </div>
+                </div>
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr2">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <i class="ion-sad"></i>
+                        <div class="stat-box-innr">
+                            <span>
+                                <i>{{ data|get_item:'cards'|get_item:'lowest_score' }}</i>
+                            </span>
+                            <h5>Lowest Score</h5>
+                        </div>
+                        <span><br/></span>
+                    </div>
+                </div>
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr3">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <i class="ion-close"></i>
+                        <div class="stat-box-innr">
+                            <span>
+                                <i>{{ data|get_item:'cards'|get_item:'most_mistakes' }}</i>
+                            </span>
+                            <h5>Most Mistakes</h5>
+                        </div>
+                        <span><br/></span>
+                    </div>
+                </div>
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr4">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <i class="ion-ios-star"></i>
+                        <div class="stat-box-innr">
+                            <span>
+                                <i>{{ data|get_item:'cards'|get_item:'highest_score' }}</i>
+                            </span>
+                            <h5>Highest Score</h5>
+                        </div>
+                        <span><br/></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="widget pad50-65">
+                <div>
+                    <h4 class="widget-title">Performance Report</h4>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Surveillance Officer</th>
+                        <th class="text-center">Supervisor Evaluation</th>
+                        <th class="text-center">Work Output (CiiMs)</th>
+                        <th class="text-center">Accuracy Rate</th>
+                        <th class="text-center">Final Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for officer, info in data.performance_report.items %}
+                        <tr
+                                {% if  info|get_item:'final_mark' <= 60 %}
+                                    class="table-danger"
+                                {% elif info|get_item:'final_mark' >= 80 %}
+                                    class="table-success"
+                                {% endif %}>
+                            <th class="text-center">{{ officer }}</th>
+                            <td class="text-center">{{ info|get_item:'supervisor_mark' }}%</td>
+                            <td class="text-center">{{ info|get_item:'work_output' }}%</td>
+                            <td class="text-center">{{ info|get_item:'accuracy_rate' }}%</td>
+                            <td class="text-center">{{ info|get_item:'final_mark' }}%</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row grid-wrap mrg20">
+                <div class="col-md-12 grid-item col-sm-12 col-lg-12">
+                    <div class="traffic-src widget">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 col-lg-5">
+                                <div class="trfc-cnt">
+                                    <h4 class="widget-title">Work Output (CiiMs)</h4>
+                                    <p>Our surveillance officers are instructed to log everything they see. We cannot,
+                                        however, equate a higher number of risk observations with higher performance as
+                                        this would
+                                        encourage surveillance officers to selectively log occurrences based on their
+                                        perceived value.</p>
+                                    <br/>
+                                    <p>Our risk observation score takes into account total logged occurrences, number and type of
+                                        shifts worked, as well as performance as compared to the group. This results in
+                                        a more objective score that is less prone to manipulation and provides an
+                                        accurate representation of individual performance!</p>
+                                </div>
+                                <div class="rat-itms">
+                                    <div class="rat-itm">
+                                        <div class="rat-itm-inf">
+                                            <span>
+                                                <i class="counter">{{ data|get_item:'total_entries_logged' }}</i>
+                                            </span>
+                                            <i>Occurrences Logged</i>
+                                        </div>
+                                        <i class="ion-android-list trs-clr"></i>
+                                    </div>
+                                    <div class="rat-itm">
+                                        <div class="rat-itm-inf">
+                                            <span>
+                                                <i class="counter">{{ data|get_item:'total_risks_logged' }}</i></span>
+                                            <i>Risks Observed</i>
+                                        </div>
+                                        <i class="ion-alert-circled trs-red-clr"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-12 col-lg-7">
+                                <div class="traffic-chart-wrp">
+                                    {{ data|get_item:'chart'|get_item:'script' | safe }}
+                                    {{ data|get_item:'chart'|get_item:'div' | safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget pad50-65">
+                <div class="widget-title2">
+                    <h4>Risk Observation Scores</h4>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Filter Items -->
+        </div>
+    </div>
+
+{% endblock %}

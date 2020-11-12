@@ -23,14 +23,16 @@ class SupervisorEvaluationAdmin(admin.ModelAdmin):
 
 
 class EvaluationAnswerAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'id', 'question_score']
+    list_display = ['__str__', 'question_score', 'id']
+    list_filter = ['evaluation__surveillance_officer', 'evaluation__surveillance_officer__project']
+    date_hierarchy = 'evaluation__date_conducted'
 
 
 class IndividualMonthlyRatingAdmin(admin.ModelAdmin):
     list_display = ['surveillance_officer', 'id', 'month', 'project']
     search_fields = ['surveillance_officer__first_name', 'surveillance_officer__last_name']
     date_hierarchy = 'date'
-    list_filter = ['surveillance_officer__project__name']
+    list_filter = ['surveillance_officer__project']
 
 
 admin.site.register(SurveillanceOfficer, SurveillanceOfficerAdmin)

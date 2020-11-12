@@ -219,6 +219,8 @@ textarea {resize: none;}
 .mrg20 > div {padding: 0 10px;}
 .mrg10 {margin: 0 -5px;}
 .mrg10 > div {padding: 0 5px;}
+.mrg0 {margin: 0 0px;}
+.mrg0 > div {padding: 0 0px;}
 .widget.pad0,
 .pad0 {padding: 0;}
 .widget.pad40,
@@ -233,10 +235,10 @@ textarea {resize: none;}
 .pad50-65 {padding: 50px 65px;}
 .widget.pad30-25,
 .pad30-25 {padding: 30px 25px;}
-.bg-clr1 {background-color: #e2357c !important;}
-.bg-clr2 {background-color: #f1634e !important;}
-.bg-clr3 {background-color: #01a693 !important;}
-.bg-clr4 {background-color: #00b8e5 !important;}
+.bg-clr1 {background-color: #84C5C5 !important;}
+.bg-clr2 {background-color: #A484C5 !important;}
+.bg-clr3 {background-color: #C58484 !important;}
+.bg-clr4 {background-color: #A4C584 !important;}
 .bg-clr5 {background-color: #13aaf9 !important;}
 .bg-clr6 {background-color: #ffb22b !important;}
 .bg-clr7 {background-color: #7460ee !important;}
@@ -998,7 +1000,7 @@ nav h4 {opacity: 0;}
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, .1);
-    height: 50px;
+    height: 0px;
     z-index: -1;
 }
 .stat-box > i {
@@ -6726,7 +6728,7 @@ header.light-skin.hdr-bgclr2:before {
 tspan {font-weight: 400;}
 
 
-/*===== Color Tarsuis =====*/
+/*===== Color Tarsuis=====*/
 
 /*===== Background Color =====*/
 .trs-bg,
@@ -6833,4 +6835,113 @@ body.dark .error-inner > h2.trs-clr
 
 {
     border-left-color: #4fa7a7;
+}
+
+/*===== Color Tarsuis-RED =====*/
+
+/*===== Background Color =====*/
+.trs-red-bg,
+.side-header > nav ul > li > a:after,
+.side-header > div > nav ul > li > a:after,
+.pckg-bdy > a:hover,
+.qnty-add-crt > a:hover,
+ul.steps > li.current,
+ul.steps > li.current > span,
+.form-wrp fieldset p a,
+.pgntn .pgntn-lst > li span.active,
+.style1 .pgntn-lst > li:hover a,
+.style2 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li:hover a,
+.style3 .pgntn-lst > li.prv:hover a,
+.style3 .pgntn-lst > li.nxt:hover a,
+.style4 .pgntn-lst > li.prv:hover a,
+.style4 .pgntn-lst > li.nxt:hover a,
+.tab-styl2 > ul.nav-tabs > li.nav-item > a.active,
+.invoice-dte > a:hover,
+.pckg-bx.slctd.trs-red-bg,
+body.dark .style4 .pgntn-lst > li.prv:hover a,
+body.dark .style4 .pgntn-lst > li.nxt:hover a,
+body.dark .pgntn .pgntn-lst > li span.active,
+body.dark .style1 .pgntn-lst > li:hover a,
+body.dark .style2 .pgntn-lst > li:hover a,
+body.dark .style3 .pgntn-lst > li:hover a
+{
+    background-color: #A74F4F;
+}
+
+.trs-red-bg-hover:hover
+{
+    background-color: #A74F4F !important;
+}
+
+/*===== Text Color =====*/
+.trs-red-clr,
+.scl-msg-inr > h2 a:hover,
+.insta-inf > h2 a:hover,
+.prd-inf > h4 a:hover,
+.prd-inf > h4 a:focus,
+.prd-inf a.rev-btn:hover,
+.prd-inf a.rev-btn:focus,
+.review-btn:hover,
+.review-btn:focus,
+.product-detail-tabs > ul.nav-tabs > li > a.active,
+.product-detail-tabs > ul.nav-tabs > li > a:hover,
+.product-detail-tabs > ul.nav-tabs > li > a:focus,
+.product-detail-tabs .tab-pane > ul > li:before,
+.style1 .pgntn-lst > li.prv:hover a,
+.style1 .pgntn-lst > li.nxt:hover a,
+.style1 .pgntn-lst > li.prv a:focus,
+.style1 .pgntn-lst > li.nxt a:focus,
+.pgntn.style4 .pgntn-lst > li span.active,
+.style4 .pgntn-lst > li:hover a,
+.style4 .pgntn-lst > li a:focus,
+footer > p a:hover,
+footer > p a:focus,
+.inf-inr > span i.trs-red-clr,
+.grn-inf-lst > span.trs-red-clr,
+.cnt-opt-lst > span:hover,
+.mail-opt > ul > li a:hover i,
+.mail-opt > ul > li a:hover,
+.mail-opt > ul > li a:focus,
+.mail-opt > ul > li a:focus i,
+body.dark .inf-inr > span i.trs-red-clr,
+body.dark .invoice-dte > span i.trs-red-clr,
+body.dark .invoice-hd > h1.trs-red-clr,
+body.dark .prd-inf a.rev-btn:hover,
+body.dark .prd-inf a.rev-btn:focus,
+body.dark .review-btn:hover,
+body.dark .review-btn:focus,
+body.dark .error-inner > h2.trs-red-clr
+{
+    color: #A74F4F;
+}
+
+/*===== Border Color =====*/
+
+{
+    border-color: #A74F4F;
+}
+
+/*===== Border Top Color =====*/
+
+{
+    border-top-color: #A74F4F;
+}
+
+/*===== Border Right Color =====*/
+
+{
+    border-right-color: #A74F4F;
+}
+
+/*===== Border Bottom Color =====*/
+.tab-styl2 > ul.nav-tabs
+{
+    border-bottom-color: #A74F4F;
+}
+
+/*===== Border Left Color =====*/
+
+{
+    border-left-color: #A74F4F;
 }
