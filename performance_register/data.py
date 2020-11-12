@@ -11,6 +11,15 @@ MODIFIER_SUPERVISOR_MARK = 0.6
 MODIFIER_WORK_OUTPUT = 0.2
 MODIFIER_ACCURACY_RATE = 0.2
 
+MONTH_OPTIONS = {
+    'latest': [1],
+    'historical:': [1, 2, 3, 4, 5, 6],
+}
+
+
+def get_month(option):
+    pass
+
 
 def performance_report(officers, supervisor_marks, work_outputs, accuracy_rates):
     result = {}
@@ -30,12 +39,12 @@ def performance_report(officers, supervisor_marks, work_outputs, accuracy_rates)
     return result
 
 
-def card_stats(performance_report):
+def card_stats(report):
     activity = {}
     mark = {}
     accuracy = {}
 
-    for officer, stat in performance_report.items():
+    for officer, stat in report.items():
         activity[officer] = stat['work_output']
         mark[officer] = stat['final_mark']
         accuracy[officer] = stat['final_mark']
@@ -50,7 +59,7 @@ def card_stats(performance_report):
     return cards
 
 
-def get_data(active_project, month, year):
+def get_data(active_project):
     latest_month = date.today().month - 1 if date.today().day > 15 else date.today().month - 3  # CHANGE!
     latest_year = date.today().year
     if latest_month == 0:
@@ -66,19 +75,26 @@ def get_data(active_project, month, year):
         date__year=latest_year
     )
 
-    officers = [rating.surveillance_officer.__str__() for rating in ratings]
-    risk_observation_scores = [rating.weighted_risk_observation_score for rating in ratings]
-    supervisor_marks = [rating.supervisor_mark for rating in ratings]
+    officers, risk_observation_scores, supervisor_marks, accuracy_rates, total_entries, total_risks, evaluations \
+        = ([] for i in range(7))
+
+    for rating in ratings:
+        officers.append(rating.surveillance_officer.__str__())
+        risk_observation_scores.append(rating.weighted_risk_observation_score(day_shift=True))
+        supervisor_marks.append(rating.supervisor_mark)
+        accuracy_rates.append(rating.accuracy_rate)
+        total_entries.append(rating.total_entries)
+        total_risks.append(rating.total_risks)
+        evaluations.append(rating.evaluation)
+
     work_outputs = [round(output / max(risk_observation_scores) * 100) for output in risk_observation_scores]
-    accuracy_rates = [rating.accuracy_rate for rating in ratings]
-    total_entries = [rating.total_entries for rating in ratings]
-    total_risks = [rating.total_risks for rating in ratings]
 
     data = {
         'chart': chart(officers, risk_observation_scores) if len(risk_observation_scores) > 0 else {},
         'performance_report': performance_report(officers, supervisor_marks, work_outputs, accuracy_rates),
         'total_entries_logged': sum(total_entries),
         'total_risks_logged': sum(total_risks),
+        'evaluations': evaluations
     }
 
     data['cards'] = card_stats(data['performance_report'])

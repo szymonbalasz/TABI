@@ -33,7 +33,7 @@ class EvaluationQuestion(models.Model):
 
 
 class SupervisorEvaluation(models.Model):
-    questions = models.ManyToManyField(EvaluationQuestion, through="EvaluationAnswer")
+    questions = models.ManyToManyField(EvaluationQuestion, through="EvaluationAnswer", related_name="evaluation_question")
     date_conducted = models.DateField(default=date.today)
     surveillance_officer = models.ForeignKey(SurveillanceOfficer, on_delete=models.CASCADE,
                                              related_name='supervisor_evaluation')
@@ -47,8 +47,8 @@ class EvaluationAnswer(models.Model):
     question = models.ForeignKey(EvaluationQuestion, on_delete=models.CASCADE)
     evaluation = models.ForeignKey(SupervisorEvaluation, on_delete=models.CASCADE, related_name='evaluation_answer')
     question_score = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-    rating_reason = models.CharField(max_length=255)
-    employee_feedback = models.CharField(max_length=255)
+    rating_reason = models.CharField(max_length=255, default="No feedback from supervisor")
+    employee_feedback = models.CharField(max_length=255, default="No feedback from employee")
 
     def __str__(self):
         return f"Question_ID: {self.question.id} on Evaluation_ID: {self.evaluation.id} " \
@@ -95,6 +95,35 @@ class IndividualMonthlyRating(models.Model):
     def total_risks(self):
         return self.incidents + self.non_compliances + self.observations
 
+    @property
+    def supervisor_mark(self):
+        if self.supervisor_evaluation is None:
+            return 0
+
+        scores = [score.question_score * 10.0 for score in self.supervisor_evaluation.evaluation_answer.all()]
+
+        if len(scores) == 0:
+            return 0
+
+        mark = round(sum(scores) / len(scores))
+
+        return mark
+
+    @property
+    def evaluation(self):
+        result = {}
+        if self.supervisor_evaluation is None:
+            return result
+
+        for question in self.supervisor_evaluation.evaluation_answer.all():
+            result[question.question.question_text] = {
+                'score': question.question_score,
+                'supervisor_feedback': question.rating_reason,
+                'employee_feedback': question.employee_feedback,
+            }
+
+        return {self.surveillance_officer.__str__(): result}
+
     def average_group_entries_per_shift(self, day_shift):
         members = IndividualMonthlyRating.objects.filter(
             date__month=self.date.month).filter(
@@ -106,7 +135,6 @@ class IndividualMonthlyRating(models.Model):
 
         return sum(group_entries_per_shift) / len(group_entries_per_shift)
 
-    @property
     def weighted_risk_observation_score(self, day_shift=True):
         shifts = self.day_shifts if day_shift else self.total_shifts
         average_own_entries_per_shift = self.total_entries / shifts
@@ -117,18 +145,3 @@ class IndividualMonthlyRating(models.Model):
         risk_observation_score = average_own_risks_per_shift / average_own_entries_per_shift
 
         return round(weighted_modifier * risk_observation_score * 100)
-
-    @property
-    def supervisor_mark(self):
-        if self.supervisor_evaluation is None:
-            return 0
-
-        scores = [score.question_score * 10.0 for score in self.supervisor_evaluation.evaluation_answer.all()]
-
-        if len(scores) == 0:
-            return 0
-
-        mark = round(sum(scores)/len(scores))
-
-        return mark
-
