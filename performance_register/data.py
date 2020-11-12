@@ -6,19 +6,21 @@ from bokeh.transform import factor_cmap
 from bokeh.embed import components
 from .models import IndividualMonthlyRating
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 MODIFIER_SUPERVISOR_MARK = 0.6
 MODIFIER_WORK_OUTPUT = 0.2
 MODIFIER_ACCURACY_RATE = 0.2
 
-MONTH_OPTIONS = {
-    'latest': [1],
-    'historical:': [1, 2, 3, 4, 5, 6],
-}
+DAY_PERFORMANCE_REGISTER_UPDATE = 10
 
 
-def get_month(option):
-    pass
+def get_report_date(month_offset):
+    if date.today().day < DAY_PERFORMANCE_REGISTER_UPDATE:
+        month_offset += 1
+    report_date = date.today() - relativedelta(months=month_offset)
+
+    return report_date.year, report_date.month
 
 
 def performance_report(officers, supervisor_marks, work_outputs, accuracy_rates):
@@ -59,20 +61,11 @@ def card_stats(report):
     return cards
 
 
-def get_data(active_project):
-    latest_month = date.today().month - 1 if date.today().day > 15 else date.today().month - 3  # CHANGE!
-    latest_year = date.today().year
-    if latest_month == 0:
-        latest_month = 12
-        latest_year -= 1
-    elif latest_month == -1:
-        latest_month = 11
-        latest_year -= 1
-
+def get_data(active_project, year, month):
     ratings = IndividualMonthlyRating.objects.filter(
         surveillance_officer__project=active_project).filter(
-        date__month=latest_month).filter(
-        date__year=latest_year
+        date__year=year).filter(
+        date__month=month
     )
 
     officers, risk_observation_scores, supervisor_marks, accuracy_rates, total_entries, total_risks, evaluations \

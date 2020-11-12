@@ -12,7 +12,21 @@
             <span>Tarsuis Analytics and Business Intelligence</span>
         </div>
     </div>
+<button onclick="myFunction()">Click Me</button>
+
+<div id="myDIV">
+  This is my DIV element.
+</div>
     <!-- Page Top -->
 
-
+    <script>
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
 {% endblock %}

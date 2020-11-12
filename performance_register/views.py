@@ -3,10 +3,10 @@ from django.shortcuts import render
 from . import models
 from dashboard.models import Project
 from datetime import date
-from .data import get_data
-
+from .data import get_data, get_report_date
 
 @login_required
 def performance_register(request):
-    data = get_data(Project.objects.get(id=request.user.user_profile.active_project))
+    report_date = get_report_date(1)
+    data = get_data(Project.objects.get(id=request.user.user_profile.active_project), report_date[0], report_date[1])
     return render(request, 'performance_register.html', {'data': data})
