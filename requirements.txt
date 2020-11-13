@@ -8,6 +8,7 @@ Jinja2==2.11.2
 MarkupSafe==1.1.1
 numpy==1.19.4
 packaging==20.4
+pandas==1.1.4
 Pillow==8.0.1
 psycopg2==2.8.6
 pyparsing==2.4.7
