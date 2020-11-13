@@ -135,7 +135,7 @@ def mistakes_pie_chart(officers, mistakes):
     data['angle'] = data['value'] / data['value'].sum() * 2 * pi
     data['color'] = Category20c[len(x)]
 
-    p = figure(plot_height=350, title="Misakes per Member", toolbar_location=None,
+    p = figure(plot_height=350, title="Mistakes per Member", toolbar_location=None,
                tools="hover", tooltips="@officer: @value", x_range=(-0.5, 1.0))
 
     p.wedge(x=0, y=1, radius=0.4,
