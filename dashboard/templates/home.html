@@ -7,21 +7,25 @@
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
             <h4>Welcome to your
-                <strong>{{ user.user_profile.default_project }} T-ABI</strong>
+                <strong>{{ user.user_profile.active_project_name }}</strong>
                 <span></span> Dashboard</h4>
             <span>Tarsuis Analytics and Business Intelligence</span>
         </div>
     </div>
 <button onclick="myFunction()">Click Me</button>
 
-<div id="myDIV">
+<div id="myDIV 1">
+  This is my DIV element.
+</div>
+
+    <div id="myDIV 2">
   This is my DIV element.
 </div>
     <!-- Page Top -->
 
     <script>
     function myFunction() {
-      var x = document.getElementById("myDIV");
+      var x = document.getElementById("myDIV 2");
       if (x.style.display === "none") {
         x.style.display = "block";
       } else {

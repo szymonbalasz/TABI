@@ -7,7 +7,6 @@ def home(request, project_id=None):
     if project_id is not None:
         if int(project_id) in [project.id for project in request.user.user_profile.projects.all()]:
             request.user.user_profile.active_project = int(project_id)
-            print(f"project changed to: {request.user.user_profile.active_project}")
         return redirect(home)
     return render(request, 'home.html', {})
 

@@ -11,7 +11,7 @@ class Project(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
-    projects = models.ManyToManyField(Project)
+    projects = models.ManyToManyField(Project, related_name='project')
     title = models.CharField(max_length=100)
     company = models.CharField(max_length=100, default='Tarsuis Client')
 
@@ -31,3 +31,7 @@ class UserProfile(models.Model):
     def active_project(self, project_id):
         self._active_project = project_id
         self.save()
+
+    @property
+    def active_project_name(self):
+        return self.projects.filter(id=self.active_project)[0]

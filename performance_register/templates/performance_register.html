@@ -7,9 +7,10 @@
     <div class="pg-tp">
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
-            <h4>Welcome to your
-                <strong>T-ABI</strong>
+            <h4>{{ month }} {{ year }}
+                <strong>{{ user.user_profile.active_project_name }}</strong>
                 <span></span> Performance Register</h4>
+            <span>Please select officer from Performance Report to view individual supervisor evaluation.</span>
         </div>
     </div>
     <!-- Page Top -->
@@ -103,20 +104,44 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th class="text-left" style="width: 40%">Surveillance Officer</th>
-                        <th class="text-center" style="width: 15%">Supervisor Evaluation</th>
-                        <th class="text-center" style="width: 15%">Work Output (CiiMs)</th>
-                        <th class="text-center" style="width: 15%">Accuracy Rate</th>
-                        <th class="text-center" style="width: 15%">Final Score</th>
+                        <th class="text-left" style="width: 35%">Surveillance Officer</th>
+                        <th class="text-center" style="width: 20%">Supervisor Evaluation <i class="fa fa-info-circle"
+                                                                                            aria-hidden="true"
+                                                                                            data-toggle="tooltip"
+                                                                                            data-placement="top"
+                                                                                            title="An aggregate of all scores recorded in this month's supervisor evaluation."></i>
+                        </th>
+                        <th class="text-center" style="width: 15%">Work Output (CiiMs) <i class="fa fa-info-circle"
+                                                                                          aria-hidden="true"
+                                                                                          data-toggle="tooltip"
+                                                                                          data-placement="top"
+                                                                                          title="A factor of the Risk Observation Score against the highest performing member this month."></i>
+                        </th>
+                        <th class="text-center" style="width: 15%">Accuracy Rate <i class="fa fa-info-circle"
+                                                                                    aria-hidden="true"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="The proportion of entries which did not require later correction."></i>
+                        </th>
+                        <th class="text-center" style="width: 15%">Final Score <i class="fa fa-info-circle"
+                                                                                  aria-hidden="true"
+                                                                                  data-toggle="tooltip"
+                                                                                  data-placement="top"
+                                                                                  title="Final Score is weighted according to: 60% Supervisor Evaluation, 20% Work Output, 20% Accuracy Rate"></i>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for officer, value in data.performance_report.items %}
                         <tr
+                                onclick="hideAll();
+                                        hide{{ officer|rmv_whitespace }}();
+                                        window.location='#{{ officer|rmv_whitespace }}';"
+                                style="cursor: pointer;"
                                 {% if  value|get_item:'final_mark' <= 60 %}
-                                    class="table-danger"
+                                class="table-danger"
                                 {% elif value|get_item:'final_mark' >= 80 %}
-                                    class="table-success"
+                                class="table-success"
                                 {% endif %}>
                             <td class="text-left">{{ officer }}</td>
                             <td class="text-center">{{ value|get_item:'supervisor_mark' }}%</td>
@@ -151,7 +176,8 @@
                                         encourage surveillance officers to selectively log occurrences based on their
                                         perceived value.</p>
                                     <br/>
-                                    <p>Our risk observation score takes into account total logged occurrences, number and type of
+                                    <p>Our risk observation score takes into account total logged occurrences, number
+                                        and type of
                                         shifts worked, as well as performance as compared to the group. This results in
                                         a more objective score that is less prone to manipulation and provides an
                                         accurate representation of individual performance!</p>
@@ -187,37 +213,59 @@
                 </div>
             </div>
 
-        {% for each in data.evaluations %}
-            {% for officer, eval in each.items %}
 
-            <div hidden class="widget pad50-65"">
-                <div>
-                    <h4 class="widget-title">{{ officer }} - Evaluation Sheet</h4>
-                </div>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="text-left" style="width: 40%;">Criteria / Question</th>
-                        <th class="text-center" style="width: 10;%">Score</th>
-                        <th class="text-left" style="width: 25%;">Supervisor Feedback</th>
-                        <th class="text-left" style="width: 25%;">Employee Feedback</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for question, props in eval.items %}
-                    <tr>
-                        <td class="text-left">{{ question }}</td>
-                        <td class="text-center">{{ props|get_item:'score' }}</td>
-                        <td class="text-left">{{ props|get_item:'supervisor_feedback' }}</td>
-                        <td class="text-left">{{ props|get_item:'employee_feedback' }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
 
+            {% for each in data.evaluations %}
+                {% for officer, eval in each.items %}
+
+                    <div class="widget pad50-65 officer_eval" id="{{ officer|rmv_whitespace }}" style="display: none;">
+                        <div>
+                            <h4 class="widget-title">{{ officer }} - Evaluation Sheet</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-left" style="width: 40%;">Criteria / Question</th>
+                                <th class="text-center" style="width: 10;%">Score</th>
+                                <th class="text-left" style="width: 25%;">Supervisor Feedback</th>
+                                <th class="text-left" style="width: 25%;">Employee Feedback</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for question, props in eval.items %}
+                                <tr>
+                                    <td class="text-left">{{ question }}</td>
+                                    <td class="text-center">{{ props|get_item:'score' }}</td>
+                                    <td class="text-left">{{ props|get_item:'supervisor_feedback' }}</td>
+                                    <td class="text-left">{{ props|get_item:'employee_feedback' }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <script>
+                        function hide{{ officer|rmv_whitespace }}() {
+                            let x = document.getElementById("{{ officer|rmv_whitespace }}");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
+                        }
+                    </script>
+
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+
+            <script>
+                function hideAll() {
+                    let divsToHide = document.getElementsByClassName("officer_eval");
+                    for (let i = 0; i < divsToHide.length; i++) {
+                        divsToHide[i].style.display = "none";
+                    }
+                }
+
+            </script>
 
             <!-- Filter Items -->
         </div>
