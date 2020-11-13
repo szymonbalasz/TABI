@@ -143,5 +143,4 @@ class IndividualMonthlyRating(models.Model):
         risks = self.incidents + self.non_compliances + self.observations
         average_own_risks_per_shift = risks / shifts
         risk_observation_score = average_own_risks_per_shift / average_own_entries_per_shift
-
-        return round(weighted_modifier * risk_observation_score * 100)
+        return weighted_modifier * risk_observation_score * 100
