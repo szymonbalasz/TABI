@@ -1,12 +1,13 @@
 from bokeh.io import output_file, show
 from bokeh.models import ColumnDataSource, Span
-from bokeh.palettes import Spectral6
+from bokeh.palettes import Spectral8
 from bokeh.plotting import figure
 from bokeh.transform import factor_cmap
 from bokeh.embed import components
 from .models import IndividualMonthlyRating
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from math import pi
 
 MODIFIER_SUPERVISOR_MARK = 0.6
 MODIFIER_WORK_OUTPUT = 0.2
@@ -101,10 +102,11 @@ def chart(officers, scores):
     p = figure(x_range=officers, plot_height=350, toolbar_location=None,
                title="Risk Observation Scores per Member (Higher is Better)")
     p.vbar(x='officers', top='scores', width=0.9, source=source,
-           line_color='white', fill_color=factor_cmap('officers', palette=Spectral6, factors=officers))
+           line_color='white', fill_color=factor_cmap('officers', palette=Spectral8, factors=officers))
 
     p.line([], [], legend_label='Group Average', line_color='green', line_dash='dashed')
     p.xgrid.grid_line_color = None
+    p.xaxis.major_label_orientation = pi/4
     p.y_range.start = 0
     p.y_range.end = max(scores) * 1.1
     p.legend.orientation = "horizontal"

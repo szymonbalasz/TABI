@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}T-ABI Performance Register{% endblock %}
+{% block body %}
+    {% load tags %}
+
+    <!-- Options Panel -->
+    <div class="pg-tp">
+        <i class="ion-cube"></i>
+        <div class="pr-tp-inr">
+            <h4>{{ month_one }} {{ year_one }} vs {{ month_two }} {{ year_two }}
+                <strong>{{ user.user_profile.active_project_name }}</strong>
+                <span></span> Performance Comparison</h4>
+            <span>Two month performance comparison.</span>
+        </div>
+    </div>
+    <!-- Page Top -->
+
+    <div class="panel-content">
+        <div class="filter-items">
+
+            <div class="widget pad50-65">
+                <div>
+                    <h4 class="widget-title">Performance Comparison Report</h4>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-left" style="width: 50%">Surveillance Officer</th>
+                        <th class="text-center" style="width: 25%">{{ month_one }} Final Score</th>
+                        <th class="text-center" style="width: 25%">{{ month_two }} Final Score</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for officer, value in data_one.performance_report.items %}
+                        <tr>
+                            <td class="text-left">{{ officer }}</td>
+                            <td class="text-center">{{ value|get_item:'final_mark' }}%</td>
+                        <td class="text-center">
+                            {% with data_two|get_item:'performance_report'|get_item:officer as off %}
+                            {% for k, v in off.items %}
+                                {% if k ==  'final_mark' %}
+                                    {{ v }}%
+                                {% endif %}
+                            {% endfor %}
+                            {% endwith %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row grid-wrap mrg20">
+                <div class="col-md-12 grid-item col-sm-12 col-lg-12">
+                    <div class="traffic-src widget">
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-11 col-lg-5">
+                                    {{ data_one|get_item:'chart'|get_item:'script' | safe }}
+                                    {{ data_one|get_item:'chart'|get_item:'div' | safe }}
+                            </div>
+                            <div class="ol-md-1 col-sm-1 col-lg-1">
+
+                            </div>
+                            <div class="col-md-5 col-sm-11 col-lg-5">
+                                <div class="traffic-chart-wrp">
+                                    {{ data_two|get_item:'chart'|get_item:'script' | safe }}
+                                    {{ data_two|get_item:'chart'|get_item:'div' | safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Items -->
+        </div>
+    </div>
+
+{% endblock %}
