@@ -1,13 +1,14 @@
 from bokeh.io import output_file, show
-from bokeh.models import ColumnDataSource, Span
-from bokeh.palettes import Spectral8
+from bokeh.models import ColumnDataSource, Span, FactorRange
+from bokeh.palettes import Spectral8, Category20c
 from bokeh.plotting import figure
-from bokeh.transform import factor_cmap
+from bokeh.transform import factor_cmap, cumsum
 from bokeh.embed import components
 from .models import IndividualMonthlyRating
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from math import pi
+import pandas as pd
 
 MODIFIER_SUPERVISOR_MARK = 0.6
 MODIFIER_WORK_OUTPUT = 0.2
@@ -69,8 +70,8 @@ def get_data(active_project, year, month):
         date__month=month
     )
 
-    officers, risk_observation_scores, supervisor_marks, accuracy_rates, total_entries, total_risks, evaluations \
-        = ([] for i in range(7))
+    officers, risk_observation_scores, supervisor_marks, accuracy_rates, total_entries, total_risks, evaluations, \
+        mistakes = ([] for i in range(8))
 
     for rating in ratings:
         officers.append(rating.surveillance_officer.__str__())
@@ -80,6 +81,7 @@ def get_data(active_project, year, month):
         total_entries.append(rating.total_entries)
         total_risks.append(rating.total_risks)
         evaluations.append(rating.evaluation)
+        mistakes.append(rating.mistakes)
 
     work_outputs = [round(output / max(risk_observation_scores) * 100) for output in risk_observation_scores]
 
@@ -88,7 +90,8 @@ def get_data(active_project, year, month):
         'performance_report': performance_report(officers, supervisor_marks, work_outputs, accuracy_rates),
         'total_entries_logged': sum(total_entries),
         'total_risks_logged': sum(total_risks),
-        'evaluations': evaluations
+        'evaluations': evaluations,
+        'mistakes': mistakes_pie_chart(officers, mistakes)
     }
 
     data['cards'] = card_stats(data['performance_report'])
@@ -114,6 +117,34 @@ def chart(officers, scores):
 
     p.renderers.extend([Span(location=(sum(scores) / len(scores)), dimension='width', line_color='green',
                              line_dash='dashed', line_width=3)])
+
+    script, div = components(p)
+
+    result = {
+        'script': script,
+        'div': div
+    }
+
+    return result
+
+
+def mistakes_pie_chart(officers, mistakes):
+    x = {officers[i]: mistakes[i] for i in range(len(officers))}
+
+    data = pd.Series(x).reset_index(name='value').rename(columns={'index': 'officer'})
+    data['angle'] = data['value'] / data['value'].sum() * 2 * pi
+    data['color'] = Category20c[len(x)]
+
+    p = figure(plot_height=350, title="Misakes per Member", toolbar_location=None,
+               tools="hover", tooltips="@officer: @value", x_range=(-0.5, 1.0))
+
+    p.wedge(x=0, y=1, radius=0.4,
+            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            line_color="white", fill_color='color', legend_field='officer', source=data)
+
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
 
     script, div = components(p)
 

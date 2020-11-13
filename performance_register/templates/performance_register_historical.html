@@ -53,6 +53,9 @@
             <div class="row grid-wrap mrg20">
                 <div class="col-md-12 grid-item col-sm-12 col-lg-12">
                     <div class="traffic-src widget">
+                        <div class="trfc-cnt">
+                        <h4 class="widget-title">{{ month_one }} {{ year_one }} vs {{ month_two }} {{ year_two }}</h4>
+                    </div>
                         <div class="wdgt-ldr">
                             <div class="ball-scale-multiple">
                                 <div></div>
@@ -80,6 +83,42 @@
                     </div>
                 </div>
             </div>
+
+        <div class="row grid-wrap mrg20">
+                <div class="col-md-12 grid-item col-sm-12 col-lg-12">
+
+                    <div class="traffic-src widget">
+                        <div class="trfc-cnt">
+                        <h4 class="widget-title">{{ month_one }} {{ year_one }} vs {{ month_two }} {{ year_two }}</h4>
+                    </div>
+                        <div class="wdgt-ldr">
+                            <div class="ball-scale-multiple">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-11 col-lg-5">
+                                    {{ data_one|get_item:'mistakes'|get_item:'script' | safe }}
+                                    {{ data_one|get_item:'mistakes'|get_item:'div' | safe }}
+                            </div>
+                            <div class="ol-md-1 col-sm-1 col-lg-1">
+
+                            </div>
+                            <div class="col-md-5 col-sm-11 col-lg-5">
+                                <div class="traffic-chart-wrp">
+                                    {{ data_two|get_item:'mistakes'|get_item:'script' | safe }}
+                                    {{ data_two|get_item:'mistakes'|get_item:'div' | safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Filter Items -->
         </div>

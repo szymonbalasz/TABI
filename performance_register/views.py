@@ -3,7 +3,7 @@ from django.shortcuts import render
 from . import models
 from dashboard.models import Project
 from datetime import date
-from .data import get_data, get_report_date
+from .data import get_data, get_report_date, mistakes_pie_chart
 from calendar import month_name
 
 @login_required
