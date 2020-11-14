@@ -124,21 +124,13 @@ class IndividualMonthlyRating(models.Model):
 
         return {self.surveillance_officer.__str__(): result}
 
-    def average_group_entries_per_shift(self, day_shift):
-        members = IndividualMonthlyRating.objects.filter(
-            date__month=self.date.month).filter(
-            date__year=self.date.year).filter(
-            surveillance_officer__project=self.project
-        )
-        group_entries_per_shift = [(member.total_entries / (member.day_shifts if day_shift else member.total_shifts))
-                                   for member in members]
+    def entries_per_shift(self, day_shift=True):
+        return self.total_entries/(self.day_shifts if day_shift else self.total_shifts)
 
-        return sum(group_entries_per_shift) / len(group_entries_per_shift)
-
-    def weighted_risk_observation_score(self, day_shift=True):
+    def weighted_risk_observation_score(self, average, day_shift=True):
         shifts = self.day_shifts if day_shift else self.total_shifts
         average_own_entries_per_shift = self.total_entries / shifts
-        weighted_modifier = average_own_entries_per_shift / self.average_group_entries_per_shift(day_shift)
+        weighted_modifier = average_own_entries_per_shift / average
 
         risks = self.incidents + self.non_compliances + self.observations
         average_own_risks_per_shift = risks / shifts

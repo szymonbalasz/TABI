@@ -69,13 +69,15 @@ def get_data(active_project, year, month):
         date__year=year).filter(
         date__month=month
     )
+    entries_per_shift = [rating.entries_per_shift(day_shift=True) for rating in ratings]
+    group_entries_per_shift = sum(entries_per_shift)/len(entries_per_shift)
 
     officers, risk_observation_scores, supervisor_marks, accuracy_rates, total_entries, total_risks, evaluations, \
         mistakes = ([] for i in range(8))
 
     for rating in ratings:
         officers.append(rating.surveillance_officer.__str__())
-        risk_observation_scores.append(rating.weighted_risk_observation_score(day_shift=True))
+        risk_observation_scores.append(rating.weighted_risk_observation_score(group_entries_per_shift, day_shift=True))
         supervisor_marks.append(rating.supervisor_mark)
         accuracy_rates.append(rating.accuracy_rate)
         total_entries.append(rating.total_entries)
