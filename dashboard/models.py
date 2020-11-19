@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     projects = models.ManyToManyField(Project, related_name='project')
     title = models.CharField(max_length=100)
-    company = models.CharField(max_length=100, default='Tarsuis Client')
+    company = models.CharField(max_length=100, default='Test Client')
 
     _active_project = models.PositiveIntegerField(default=None, null=True, editable=False)
 

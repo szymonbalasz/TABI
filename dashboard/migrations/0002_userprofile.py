@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
-                ('client', models.CharField(default='Tarsuis Client', max_length=100)),
+                ('client', models.CharField(default='Test Client', max_length=100)),
                 ('projects', models.ManyToManyField(to='dashboard.Project')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='user_profile', to=settings.AUTH_USER_MODEL)),
             ],
