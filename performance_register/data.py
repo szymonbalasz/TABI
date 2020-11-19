@@ -14,15 +14,18 @@ MODIFIER_SUPERVISOR_MARK = 0.6
 MODIFIER_WORK_OUTPUT = 0.2
 MODIFIER_ACCURACY_RATE = 0.2
 
-DAY_PERFORMANCE_REGISTER_UPDATE = 10
+DAY_PERFORMANCE_REGISTER_UPDATE = 15
 
 
 def get_report_date(month_offset):
-    if date.today().day < DAY_PERFORMANCE_REGISTER_UPDATE:
-        month_offset += 1
-    report_date = date.today() - relativedelta(months=month_offset)
+    # if date.today().day < DAY_PERFORMANCE_REGISTER_UPDATE:
+    #     month_offset += 1
+    # report_date = date.today() - relativedelta(months=month_offset)
+    #
+    # return report_date.year, report_date.month
 
-    return report_date.year, report_date.month
+    # date hardcoded for demo
+    return 2020, 11-month_offset
 
 
 def performance_report(officers, supervisor_marks, work_outputs, accuracy_rates):
