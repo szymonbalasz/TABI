@@ -57,11 +57,11 @@ class EvaluationAnswer(models.Model):
 
 class IndividualMonthlyRating(models.Model):
     """
-    Individual Performance Scores as obtained from CiiMs, manual performance register and supervisor feedback forms
+    Individual Performance Scores as obtained from occurence book, manual performance register and supervisor feedback forms
     """
     surveillance_officer = models.ForeignKey(SurveillanceOfficer, on_delete=models.CASCADE,
                                              related_name='individual_monthly_rating')
-    # CiiMs derived
+    # occurence book derived
     total_entries = models.PositiveIntegerField()
     total_shifts = models.PositiveIntegerField()
     day_shifts = models.PositiveIntegerField(default=0)
